@@ -1,31 +1,18 @@
-function add(n1: number, n2: number): number{
-    return n1+ n2;
+let userInput: unknown;
+let userName: string;
+
+userInput = 5;
+userInput = "max";
+
+if(typeof userInput === 'string'){
+    userName = userInput;
+}
+    
+
+function generateError(message: string, code: number): never{
+
+    throw {message: message, errocode: code};
 }
 
-function printResult(num: Number): void{
-    console.log('Result: ' + num)
-}
 
-function addAndHandle(n1: number, n2: number, cb: (num:number )=> void){
-    const result = n1 + n2;
-    cb(result);
-
-}
-
-printResult(add(7,5));
-
-
-
-let combineValues: (a: number, b: number)=> number;
-
-combineValues = add;
-// combineValues =6;
-// combineValues = printResult;
-
-console.log(combineValues(8,8));
-
-addAndHandle(10,20, (result) => {
-    console.log(result);
-});
-
-// let someValue: undefined; // will be undefined for ever. 
+generateError('An error occured!', 11);
