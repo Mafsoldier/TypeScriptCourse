@@ -1,19 +1,20 @@
+class Department {
+    name: string;
 
-const idCheckName = document.getElementById("introName");
-
-if(idCheckName){
-    idCheckName.innerHTML = "nice"; 
-}
-
-const buttonCheck = document.getElementById("clickMeButton");
-
-if (buttonCheck){
-    buttonCheck.onclick = function() {
-        console.log("clicked");
-        buttonCheck.remove();
-    };
+    constructor(n:string){
+        this.name = n;
+    }
     
+    describe(){
+        console.log('Department: ' +this.name)
+    }
 
 }
 
+const accounting = new Department('Accounting');
+const sales = new Department('Sales');
 
+// console.log(accounting);
+
+accounting.describe();
+sales.describe();
