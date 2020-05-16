@@ -66,3 +66,22 @@ p {
     justify-content: center;
   }
 
+  .item-b {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+   
+    display: flex;
+    justify-content: center;
+  }
+
+  .item-c {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 0px 20px;
+  }
