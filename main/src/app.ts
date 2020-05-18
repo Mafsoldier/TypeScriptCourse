@@ -1,173 +1,64 @@
+// Buildin generics:
 
-type Admin = {
-    name: string;
-    privileges: string[];
-};
+// const names: Array<string> = [];
 
-type Employee = {
-    name: string;
-    startDate: Date;
-};
+// // names[0].split(' ');
 
-// interface ElevatedEmployee extends Employee, Admin {}
-type ElevatedEmployee = Admin & Employee;
+// const promise = new Promise<string>((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve('This is done!');
+//     } , 2000);
+// });
 
-const e1: ElevatedEmployee = {
-    name: 'Marc',
-    privileges: ['create-server'],
-    startDate: new Date()
-};
+// promise.then(data => {
+//     data.split(' ');
+// })
 
-const e2: Admin = {
-    name: "Erik",
-    privileges: ['sex on the beach', 'Naked fun']
-}
+// Our own generic builds:
 
-type Combinable = string | number;
-type Numeric = number | boolean;
-
-type Universal = Combinable & Numeric;
-
-function add(a: number, b: number): number;
-function add(a: string, b: string): string;
-function add(a: string, b: number): string;
-function add(a: number, b: string): string;
-function add(a: Combinable, b: Combinable) {
-    if (typeof a === "string" || typeof b === "string") {
-
-        return a.toString() + b.toString();
-    }
-    return a + b;
-}
-
-const fetschedUserData = {
-    id: 'u1',
-    name: 'Max',
-    job: {title: 'CEO', description: 'My own company'}
-};
-
-// console.log(fetschedUserData.job && fetschedUserData.job.title);
-console.log(fetschedUserData?.job?.title);
-
-// const result = add(5,2);
-const result = add('Marc', 'Marjanne');
-result.split(' ');
-
-type UnknownEmployee = Employee | Admin;
-
-function printEmployeeInformation(emp: UnknownEmployee) {
-    console.log('Name: ' + emp.name);
-
-    if ('privileges' in emp) {
-        console.log("privileges: " + emp.privileges);
-    }
-    if ('startDate' in emp) {
-        console.log("Startdate: " + emp.startDate);
-    }
-}
-
-
-printEmployeeInformation(e1);
-printEmployeeInformation(e2);
-
-class Car {
-    drive() {
-        console.log('Driving..');
-    }
-}
-
-class Truck {
-    drive() {
-        console.log('Driving a truck..');
-    }
-
-    loadCargo(amount: number) {
-        console.log('loading cargo... ' + amount);
-    }
-}
-
-type Vehicle = Car | Truck;
-
-const v1 = new Car();
-const v2 = new Truck();
-
-// function useVehicle(Vehicle: Vehicle){
-//     Vehicle.drive();
-//     if('loadCargo' in Vehicle){
-//         Vehicle.loadCargo(1000);
-//     }
-
+// function merge(objA: object, objB:object) {
+//     return Object.assign(objA, objB);
 // }
+function merge<T extends object, U extends object>(objA: T, objB:U) {
+    return Object.assign(objA, objB);
+}
 
-function useVehicle(vehicle: Vehicle) {
-    vehicle.drive();
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(1000);
+console.log(merge({name:'Max'}, {age:30}));
+
+const mergedObj = merge({name: 'max', hobbies:['Sports']}, {age: 30});
+console.log(mergedObj);
+mergedObj.age;
+
+interface Lengthy {
+    length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T ): [T, string]{
+    let descriptionText = 'Got no value.';
+    if(element.length === 1){
+        descriptionText = 'Got 1 element.';
+
+    }else if (element.length > 1){
+        descriptionText = 'Got ' + element.length + ' elements';
     }
+    return [element, descriptionText];
 
 }
 
-useVehicle(v1);
-useVehicle(v2);
+console.log(countAndDescribe('Hi there'));
+console.log(countAndDescribe(['Cooks', 'Sporting']));
 
-interface Bird {
-    type: 'bird';
-    flyingSpeed: number;
-}
-
-interface Horse {
-    type: 'horse';
-    runningSpeed: number;
-}
-
-type Animal = Bird | Horse;
-
-// function moveAnimal(animal: Animal) {
-
-//     if ('flyingSpeed' in animal) {
-//         console.log("Moving with speed: " + animal.flyingSpeed)
-//     }
-//     if ('runningSpeed' in animal) {
-//         console.log("Moving with speed: " + animal.runningSpeed)
-//     } else {
-//         return;
-//     }
-// }
-
-function moveAnimal(animal: Animal) {
-    let speed;
-    switch (animal.type) {
-
-        case 'bird':
-            speed = animal.flyingSpeed;
-            break;
-        case 'horse':
-            speed = animal.runningSpeed;
-            break;
-    }
-    console.log("Moving at speed: " + speed);
-}
-
-moveAnimal({ type: 'bird', flyingSpeed: 10 });
-
-// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
-// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
-
-const userInputElement = document.getElementById('user-input');
-
-if (userInputElement) {
-    (userInputElement as HTMLInputElement).value = 'hi there!';
-}
-
-interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!}
-
-    [prop: string]: string;
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U){
+    return 'Value: ' +  obj[key];
 
 }
 
-const errorBag: ErrorContainer = {
-    email: 'Not a valid email',
-    username: 'Must start with a capital character'
-};
+extractAndConvert({name: 'Max'}, 'name');
+console.log(extractAndConvert({name: 'Max'}, 'name'));
+
+
+
+
+
 
 
