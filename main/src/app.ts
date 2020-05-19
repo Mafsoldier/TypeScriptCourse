@@ -1,133 +1,43 @@
-// Buildin generics:
+//a decorator is an function that you apply to something
 
-// const names: Array<string> = [];
-
-// // names[0].split(' ');
-
-// const promise = new Promise<string>((resolve, reject) => {
-//     setTimeout(() => {
-//         resolve('This is done!');
-//     } , 2000);
-// });
-
-// promise.then(data => {
-//     data.split(' ');
-// })
-
-// Our own generic builds:
-
-// function merge(objA: object, objB:object) {
-//     return Object.assign(objA, objB);
-// }
-function merge<T extends object, U extends object>(objA: T, objB:U) {
-    return Object.assign(objA, objB);
+function Logger(target: Function) {
+    console.log('Logging...');
+    console.log(target);
 }
 
-console.log(merge({name:'Max'}, {age:30}));
+//a decorator factory
 
-const mergedObj = merge({name: 'max', hobbies:['Sports']}, {age: 30});
-console.log(mergedObj);
-mergedObj.age;
+function Logger2(logString: string) {
+    return function (target: Function) {
+        console.log(logString);
+        console.log(target);
 
-interface Lengthy {
-    length: number;
+    };
 }
 
-function countAndDescribe<T extends Lengthy>(element: T ): [T, string]{
-    let descriptionText = 'Got no value.';
-    if(element.length === 1){
-        descriptionText = 'Got 1 element.';
-
-    }else if (element.length > 1){
-        descriptionText = 'Got ' + element.length + ' elements';
-    }
-    return [element, descriptionText];
-
-}
-
-console.log(countAndDescribe('Hi there'));
-console.log(countAndDescribe(['Cooks', 'Sporting']));
-
-function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U){
-    return 'Value: ' +  obj[key];
-
-}
-
-extractAndConvert({name: 'Max'}, 'name');
-console.log(extractAndConvert({name: 'Max'}, 'name'));
-
-
-class DataStorage<T> {
-    private data: T[] = [];
-
-
-
-    addItem(item: T) {
-        this.data.push(item);
-    }
-
-    remoteItem(item: T) {
-        this.data.splice(this.data.indexOf(item), 1);
-    }
-
-    getItems() {
-        return [...this.data];
-    }
-
-}
-
-const textStorage = new DataStorage<string>();
-
-textStorage.addItem('Dude');
-textStorage.addItem('Marjanne');
-textStorage.remoteItem('Dude');
-console.log(textStorage.getItems());
-
-const numberStorage = new DataStorage<number | string>();
-
-numberStorage.addItem(234);
-numberStorage.addItem('vette shit ouwe');
-console.log(numberStorage);
-
-const objStorage = new DataStorage<object>();
-objStorage.addItem({name: 'max'});
-objStorage.addItem({name: 'Manu'});
-//...
-objStorage.remoteItem({name: 'Manu'});
-console.log(objStorage.getItems());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let count = 0;
-
-function myFunction() {
-    if (count === 0){
-        count =1;
-    }else if(count > 100){
-        count =0;
-    }
-    else {
-        count++;
+function WithTemplate(template: string, hookID: string){
+    return function(constructor: any) {
+        const hookEL = document.getElementById(hookID);
+        const p = new constructor();
+        if(hookEL){
+            hookEL.innerHTML = template;
+            hookEL.querySelector('h1')!.textContent = p.name;
         }
-    console.log(count);
-    document.getElementById("demo")!.innerHTML = count.toString(); 
+    }
 }
 
+
+@Logger //this wil be last 
+@Logger2('Logging - Person') 
+@WithTemplate('<h1>My Person Object</h1>', 'app') //this will be first 
+class Person {
+    name = 'Max';
+
+    constructor() {
+        console.log('Creating person object... ');
+    }
+}
+
+const pers = new Person();
+console.log(pers);
 
