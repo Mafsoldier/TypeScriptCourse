@@ -57,8 +57,77 @@ extractAndConvert({name: 'Max'}, 'name');
 console.log(extractAndConvert({name: 'Max'}, 'name'));
 
 
+class DataStorage<T> {
+    private data: T[] = [];
 
 
 
+    addItem(item: T) {
+        this.data.push(item);
+    }
+
+    remoteItem(item: T) {
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+
+    getItems() {
+        return [...this.data];
+    }
+
+}
+
+const textStorage = new DataStorage<string>();
+
+textStorage.addItem('Dude');
+textStorage.addItem('Marjanne');
+textStorage.remoteItem('Dude');
+console.log(textStorage.getItems());
+
+const numberStorage = new DataStorage<number | string>();
+
+numberStorage.addItem(234);
+numberStorage.addItem('vette shit ouwe');
+console.log(numberStorage);
+
+const objStorage = new DataStorage<object>();
+objStorage.addItem({name: 'max'});
+objStorage.addItem({name: 'Manu'});
+//...
+objStorage.remoteItem({name: 'Manu'});
+console.log(objStorage.getItems());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let count = 0;
+
+function myFunction() {
+    if (count === 0){
+        count =1;
+    }else if(count > 100){
+        count =0;
+    }
+    else {
+        count++;
+        }
+    console.log(count);
+    document.getElementById("demo")!.innerHTML = count.toString(); 
+}
 
 
