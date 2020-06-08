@@ -1,58 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MplusKASSA Tafelvoetbal</title>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
-  <script src="dist/app.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="players.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tafelvoetbal Dashboard</title>
 
 </head>
-
 <body>
 
-  <div class="containerHeader">
-    <div class="item-Header">
-
-      <p class="pheader">MplusKASSA Tafelvoetbal League!</p>
+    <div>
+        <h1>Dashboard Tafelvoetbal</h1>
     </div>
-  </div>
-
-  <div class="container">
-    
-
-         <form class="item-b" action="/" name="myForm" method="GET">  
-          <!-- action="/action_page.php" onsubmit="return validateForm()" -->
-          <input type="text" name="speler1Naam" value="Speler 1">
-          <input type="text" name="speler2Naam" value="Speler 2">
-         <input type="submit" value="Submit">
-         </form>
-
-      
-  
-
-      
-      
-
-  </div>
-
-  <div class="container">
-    <div class="item-a">
-
-      <p>Speler 1</p> 
-      <p>VS</p>
-      <p> Speler 2</p>
-      
-      
-    </div>
-  </div>
 
 
 
+<div>
+    <h3>Spelers</h3>
+    <p id="players"></p>
+        
+        <script>
+            writePlayers();
+            setCookie();
+            readCookie();
+        </script>
+
+</div>
+   
 
 
+<hr>
+<footer>
+    <form action="">
+        Nieuwe speler <input type="text" id="add-player">
+        <button type="button" onclick="addPlayer()">Add</button>
+        Verwijder speler <input type="text" id="delete-player">
+        <button type="button" onclick="deletePlayer()">Delete</button>
+    </form>
+</footer>
 
 </body>
 </html>
+
