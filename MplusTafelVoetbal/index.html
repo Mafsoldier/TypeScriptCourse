@@ -15,32 +15,10 @@
     <div>
         <h1>Dashboard Tafelvoetbal</h1>
     </div>
+    
+    <div id="spelers"></div>
 
-    <div>
-        
-        <script>
-        </script>
-    </div>
-
-
-<div>
-    <form action="">
-        <h1>Kies spelers</h1>
-        <fieldset>
-            <select id="choisePlayer1">
-                <option value = "1">Speler 1</option>
-                <option value = "2">Speler 2</option>
-                <option value = "3">Speler 3</option>
-            </select>
-            <select id="choisePlayer2">
-                <option value = "1">Speler 1</option>
-                <option value = "2">Speler 2</option>
-                <option value = "3">Speler 3</option>
-            </select>
-            <button onclick="chooseMatch()">Kies spelers</button>
-        </fieldset>
-    </form>
-</div>
+    <div id="players"></div>
 
 
 
@@ -58,3 +36,8 @@
 
 </html>
 
+<script>
+    writePlayersOptions();
+    writePlayers()
+    // consoleLogger();
+</script>
