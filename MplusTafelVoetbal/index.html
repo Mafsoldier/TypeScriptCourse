@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="players.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tafelvoetbal Dashboard</title>
 
 </head>
+
 <body>
 
     <div>
         <h1>Dashboard Tafelvoetbal</h1>
     </div>
 
+    <div>
+        
+        <script>
+        </script>
+    </div>
 
 
 <div>
-    <h3>Spelers</h3>
-    <p id="players"></p>
-        
-        <script>
-            writePlayers();
-            findPlayer("Benjamin");
-        </script>
-
+    <form action="">
+        <h1>Kies spelers</h1>
+        <fieldset>
+            <select id="choisePlayer1">
+                <option value = "1">Speler 1</option>
+                <option value = "2">Speler 2</option>
+                <option value = "3">Speler 3</option>
+            </select>
+            <select id="choisePlayer2">
+                <option value = "1">Speler 1</option>
+                <option value = "2">Speler 2</option>
+                <option value = "3">Speler 3</option>
+            </select>
+            <button onclick="chooseMatch()">Kies spelers</button>
+        </fieldset>
+    </form>
 </div>
 
-<!-- hier komt een zoekfunctie voor spelers -->
-<!-- <form action="">
-    <input type="text" id="input-player">
-    <button onclick="findPlayer ()">Find</button>
-</form> -->
-   
 
 
-<hr>
-<footer>
-    <form action="">
-        Nieuwe speler <input type="text" id="add-player">
-        <button type="button" onclick="addPlayer()">Add</button>
-        Verwijder speler <input type="text" id="delete-player">
-        <button type="button" onclick="deletePlayer()">Delete</button>
-    </form>
-</footer>
+    <hr>
+    <footer>
+        <form action="">
+            Nieuwe speler <input type="text" id="add-player">
+            <button type="button" onclick="addPlayer()">Add</button>
+            Verwijder speler <input type="text" id="delete-player">
+            <button type="button" onclick="deletePlayer()">Delete</button>
+        </form>
+    </footer>
 
 </body>
+
 </html>
 
