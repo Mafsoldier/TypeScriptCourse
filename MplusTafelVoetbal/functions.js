@@ -1,8 +1,17 @@
+const sqlite3 = require('sqlite3').verbose();
+
+
 // player class
 class Player {
     constructor(name) {
         this.playername = name;
         this.score = 0;
+        this.playedMatches = 0;
+        this.wins = 0;
+        this.losses = 0;
+        this.goals = 0;
+        this.counterGoals = 0;
+        this.klinkers = 0;
     }
 }
 
@@ -15,19 +24,6 @@ let defaultPlayer3 = new Player("Benjamin");
 let players = [defaultPlayer1, defaultPlayer2, defaultPlayer3];
 let arrayLength = players.length;
 
-// write the players to the dome
-function writePlayers() {
-
-    for (let i = 0; i < arrayLength; i++) {
-        text +=
-            "<li id=id " + i + ">" +
-            "<div>" + players[i].playername + "</div>" + "<div>" +
-            " Score: " + players[i].score + "</div>" +
-            "</li>";
-    }
-    document.getElementById("spelers").innerHTML = "<ul>" + text + "</ul>";
-}
-
 
 //Add a player to the player list 
 function addPlayer() {
@@ -38,17 +34,14 @@ function addPlayer() {
         let newPlayer = new Player(document.getElementById("add-player").value);
         players.push(newPlayer);
         console.log(newPlayer.playername + " is added to the list.");
-        // console.log(findPlayerIndex(newPlayer.playername));
         consoleLogPlayers();
     }
 }
 
 function checkIfPlayerExists(playerName) {
     if (findPlayerIndex(playerName)) {
-        // console.log("Player known!")
         return true;
     } else {
-        // console.log("Player unknown");
         return false;
     }
 }
@@ -90,34 +83,64 @@ function deletePlayer() {
 }
 
 // function to set the score
-function whoWins(playerWins) {
+function setScores(playerWins) {
+
+    // let winningPlayer = document.getElementById("winningPlayer").value;
+    let winningPlayerIndex = findPlayerIndex(playerWins);
+    players[winningPlayerIndex].score = players[winningPlayerIndex].score + 1;
+    console.log("The player: " + players[winningPlayerIndex].playername + " has: " + players[winningPlayerIndex].score + " points.")
 
 }
 
-// test functie
+// setup game match
 
 function chooseMatch() {
     let player1 = document.getElementById("choisePlayer1").value;
     let player2 = document.getElementById("choisePlayer2").value;
-    if(player1 === player2){
+    if (player1 === player2) {
         console.log("false match");
 
-    }else {
+    } else {
         console.log(player1 + " versus " + player2);
     }
-    
+
 }
 
+// nog doornemen met Benjamin
+// Making the choise list of players
+//alleen gaan tonen wie er tegen elkaar kunnen.
+// function writePlayersOptions() {
+//     let part1 = `<select id="choisePlayer1">`;
+//     let part2 = '</select><select id="choisePlayer2">';
+//     let part3 = '</select>';
+
+//     for (let i = 0; i < arrayLength; i++) {
+//         list +=
+//             "<option value=" + i + ">" + players[i].playername + "</option>";
+//     }
+//     document.getElementById("players").innerHTML = part1 + list + part2 + list + part3;
+// }
+
 function writePlayersOptions() {
-    let part1 = `<form action=""><h1>Kies spelers</h1><select id="choisePlayer1">`;
-    let part2 = '</select><select id="choisePlayer2">';
-    let part3 = '</select><button type="button" onclick="chooseMatch()">Match</button></form>';
 
     for (let i = 0; i < arrayLength; i++) {
         list +=
             "<option value=" + i + ">" + players[i].playername + "</option>";
     }
-    document.getElementById("players").innerHTML = part1 + list + part2 + list + part3;
+    document.getElementById("choisePlayer1").innerHTML = list;
+}
+
+// write the players to the dome
+
+function writePlayers() {
+
+    for (let i = 0; i < arrayLength; i++) {
+        text +=
+            "<li id=id " + i + "><div>" +
+            players[i].playername + "</div><div>Score:" +
+            players[i].score + "</div></li>";
+    }
+    document.getElementById("spelers").innerHTML = "<ul>" + text + "</ul>";
 }
 
 

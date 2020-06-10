@@ -15,10 +15,22 @@
     <div>
         <h1>Dashboard Tafelvoetbal</h1>
     </div>
-    
+
     <div id="spelers"></div>
 
-    <div id="players"></div>
+<!-- 
+    <form action="">
+        <h1>Kies spelers</h1>
+            <div id="players"></div>
+        <button type="button" onclick="chooseMatch()">Match</button>
+    </form> -->
+
+    <form action="">
+        <h1>Kies spelers</h1>
+        <select id="choisePlayer1"> </select>
+        <!-- <select id="choisePlayer2"> </select> -->
+        <button type="button" onclick="chooseMatch()">Match</button>
+    </form>
 
 
 
@@ -39,5 +51,6 @@
 <script>
     writePlayersOptions();
     writePlayers()
+    setScores("Marc");
     // consoleLogger();
 </script>
