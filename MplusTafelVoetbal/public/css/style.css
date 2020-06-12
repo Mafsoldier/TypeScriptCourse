@@ -1,0 +1,14 @@
+h1 {
+    color: red;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 75px auto auto 75px;
+    grid-template-rows: 150px auto 150px;
+    grid-template-areas: 
+    "header header header header"
+    "main main main main"
+    "footer footer footer footer";
+}
+

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="functions.js"></script>
     <meta charset="UTF-8">
@@ -12,27 +13,20 @@
 
 <body>
 
-    <div>
+    <div class="container" >
         <h1>Dashboard Tafelvoetbal</h1>
     </div>
 
     <div id="spelers"></div>
+    <h1 id="matchStatus"></h1>
 
-<!-- 
-    <form action="">
+    <form id="mainForm" action="">
         <h1>Kies spelers</h1>
-            <div id="players"></div>
-        <button type="button" onclick="chooseMatch()">Match</button>
-    </form> -->
-
-    <form action="">
-        <h1>Kies spelers</h1>
-        <select id="choisePlayer1"> </select>
-        <!-- <select id="choisePlayer2"> </select> -->
-        <button type="button" onclick="chooseMatch()">Match</button>
+        <select onchange="writePlayersOptions2(document.getElementById(`choisePlayer1`).value)" id="choisePlayer1">
+            <option value="" disabled selected>Select your option</option></select>
+        <select id="choisePlayer2"></select>
+        <button type="button" onclick="match()">Match</button>
     </form>
-
-
 
     <hr>
     <footer>
@@ -50,7 +44,5 @@
 
 <script>
     writePlayersOptions();
-    writePlayers()
-    setScores("Marc");
-    // consoleLogger();
+    writePlayers();
 </script>
