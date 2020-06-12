@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="functions.js"></script>
     <meta charset="UTF-8">
@@ -12,31 +12,41 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="itemHeader">
+            <h1>Dashboard Tafelvoetbal</h1>
+        </div>
+        <div id="spelers"></div>
+        <div class="itemMain">
 
-    <div class="container" >
-        <h1>Dashboard Tafelvoetbal</h1>
+            <form id="mainForm" action="">
+
+                <h1>Score invoeren</h1>
+                <select onchange="writePlayersOptions2(document.getElementById(`choisePlayer1`).value)"
+                    id="choisePlayer1">
+                    <option value="" disabled selected>Select your option</option>
+                </select>
+                <select id="choisePlayer2"></select>
+                <button type="button" onclick="match()">Match</button>
+            </form>
+        </div>
+
+        <footer class="itemFooter">
+            <hr>
+            <form action="">
+                Nieuwe speler <input type="text" id="add-player">
+                <button type="button" onclick="addPlayer()">Add</button>
+                Verwijder speler <input type="text" id="delete-player">
+                <button type="button" onclick="deletePlayer()">Delete</button>
+            </form>
+        </footer>
+
     </div>
 
-    <div id="spelers"></div>
-    <h1 id="matchStatus"></h1>
 
-    <form id="mainForm" action="">
-        <h1>Kies spelers</h1>
-        <select onchange="writePlayersOptions2(document.getElementById(`choisePlayer1`).value)" id="choisePlayer1">
-            <option value="" disabled selected>Select your option</option></select>
-        <select id="choisePlayer2"></select>
-        <button type="button" onclick="match()">Match</button>
-    </form>
 
-    <hr>
-    <footer>
-        <form action="">
-            Nieuwe speler <input type="text" id="add-player">
-            <button type="button" onclick="addPlayer()">Add</button>
-            Verwijder speler <input type="text" id="delete-player">
-            <button type="button" onclick="deletePlayer()">Delete</button>
-        </form>
-    </footer>
+
+
 
 </body>
 
